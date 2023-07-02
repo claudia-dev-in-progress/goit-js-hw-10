@@ -39,25 +39,33 @@ breedsSelect.addEventListener("change", () => {
       const cat = response.data[0].breeds[0];
       const imageUrl = response.data[0].url;
       catInfo.innerHTML = "";
-
+      const list = document.createElement("ul");
+      list.style = "list-style: none; display: flex;";
+      const imageLi = document.createElement("li");
+      const contentLi = document.createElement("li");
+      contentLi.style = "padding-left: 20px; padding-right: 20px;";
       const image = document.createElement("img");
       image.src = imageUrl;
       image.style = "width: 500px; height: 500px;";
       image.alt = "Image cannot be loaded";
+      imageLi.appendChild(image);
 
-      const nameParagrahph = document.createElement("p");
+      const nameParagrahph = document.createElement("h1");
       nameParagrahph.innerHTML = cat.name;
 
       const descriptionParagraph = document.createElement("p");
       descriptionParagraph.innerHTML = cat.description;
 
       const temperamentParagraph = document.createElement("p");
-      temperamentParagraph.innerHTML = `Temperament: ${cat.temperament}`;
+      temperamentParagraph.innerHTML = `<b>Temperament</b>: ${cat.temperament}`;
+      contentLi.appendChild(nameParagrahph);
+      contentLi.appendChild(descriptionParagraph);
+      contentLi.appendChild(temperamentParagraph);
 
-      catInfo.appendChild(image);
-      catInfo.appendChild(nameParagrahph);
-      catInfo.appendChild(descriptionParagraph);
-      catInfo.appendChild(temperamentParagraph);
+      list.appendChild(imageLi);
+      list.appendChild(contentLi);
+
+      catInfo.appendChild(list);
     })
     .catch(() => {
       loadingItem.style.visibility = "hidden";
